@@ -1,0 +1,315 @@
+using System;
+
+class Zadatak
+{
+    static void T03_01_Tip_Broj_Realan()
+    {
+        // https://petlja.org/kurs/11171/4/
+        // float (4B, 6-7 znacajnih cifara), double (8B, 16-17), decimal (16B, 28-29)
+        Console.WriteLine();
+        Console.WriteLine("T03_01_Tip_Broj_Realan");
+
+        double x;   
+        x = 3;
+        x = 3.0;
+        x = +3;
+        x = +3.0;
+        x = 3e0;
+        x = 3.0e0;
+        x = +3e0;
+        x = +3.0e0;
+        x = 3E0;
+        x = 3.0E0;
+        x = +3E0;
+        x = +3.0E0;
+        x = 0.3e1;
+        x = .3e1;
+        x = +0.3e1;
+        x = +.3e1;
+        x = 0.03e2;
+        Console.WriteLine(x);
+        Console.WriteLine(x++);
+        Console.WriteLine(x+253);
+    }
+    static void T03_02_Tip_Broj_Ceo()
+    {
+        // https://petlja.org/kurs/11171/5/
+        // byte (1B), short (2B), int (4B), long (8B), ulong (8B, 2^64 = 18 * 10^18) 
+        Console.WriteLine();
+        Console.WriteLine("T03_02_Tip_Broj_Ceo");
+
+        byte b;
+        b = 3;
+        b = +3;
+        Console.WriteLine(b);
+        Console.WriteLine(b++);
+        Console.WriteLine(b+253);
+    }
+    static void T03_02_Tip_Broj_Ceo_int_prekoracenje()
+    {
+        // https://petlja.org/kurs/11171/5/
+        // byte (1B), short (2B), int (4B), long (8B), ulong (8B, 2^64 = 18 * 10^18) 
+        Console.WriteLine();
+        Console.WriteLine("T03_02_Tip_Broj_Ceo_int_prekoracenje");
+
+        int n = 256;
+        n = n * n; Console.WriteLine(n);
+        n = n * n; Console.WriteLine(n);
+    }
+    static void T03_03_Tip_Konverzije_i_zaokruzivanje_Konverzije()
+    {
+        // https://petlja.org/kurs/11171/6/1322
+        Console.WriteLine();
+        Console.WriteLine("T03_03_Tip_Konverzije_i_zaokruzivanje_Konverzije");
+
+        // implicitno i eksplicitno (cast)
+        // 1. implicitno (iz uzeg u siri => automatski)
+        double a = 1.0 / 16;
+        a = Math.Sqrt(2);
+
+        // 2. eksplicitno (iz sireg u uzi => ne moze automatski)
+        // 2. eksplicitno 1. kast
+        int n = (int)a;
+        int m = (int)Math.Sqrt(10);
+        double b = (double)n / m;
+
+        // 2. eksplicitno 2. parse
+        string s = "23";
+        int k = int.Parse(s);
+        s = "2.7e3";
+        double r = double.Parse(s);
+
+        // 2. eksplicitno 3. upotreba klase Convert (nece biti primera u R1)
+        double c = Convert.ToDouble(s);
+
+        // 2. eksplicitno 4. upotreba funkcije TryParse (nece biti primera u R1)
+        double broj_realan;
+        bool uspesna_konverzija = double.TryParse(s, out broj_realan); // https://learn.microsoft.com/en-us/dotnet/api/system.int32.tryparse?view=net-7.0
+        Console.WriteLine(uspesna_konverzija ? broj_realan : broj_realan + 1);
+    }
+    static void T03_03_Tip_Konverzije_i_zaokruzivanje_Zaokruzivanje()
+    {
+        // https://petlja.org/kurs/11171/6/1322#id6
+        Console.WriteLine();
+        Console.WriteLine("T03_03_Tip_Konverzije_i_zaokruzivanje_Zaokruzivanje");
+
+        double a = 2.5;
+        double b = 3.5;
+        Console.WriteLine(Math.Round(b));       // zaokruzuje ka blizem celom broju, ali blizem parnom ako je jednako udaljen od oba (na 0.5)
+        Console.WriteLine(Math.Round(a));       // zaokruzuje ka blizem celom broju, ali blizem parnom ako je jednako udaljen od oba (na 0.5)
+        Console.WriteLine(Math.Floor(a));       // zaokruzuje ka manjem celom broju
+        Console.WriteLine(Math.Ceiling(a));     // zaokruzuje ka vecem celom broju
+        Console.WriteLine(Math.Truncate(a));    // zaokruzuje ka celom broju blizem nuli
+    }
+    static void T03_03_Tip_Konverzije_i_zaokruzivanje_o_gubitku_tacnosti()
+    {
+        // https://petlja.org/kurs/11171/6/1322#id7
+        Console.WriteLine();
+        Console.WriteLine("T03_03_Tip_Konverzije_i_zaokruzivanje_o_gubitku_tacnosti");
+
+        Console.WriteLine(3 - 0.3 / 0.1);
+    }
+    static void T03_04_Tip_Znakovni_podaci_char()
+    {
+        // https://petlja.org/kurs/11171/7/#char
+        Console.WriteLine();
+        Console.WriteLine("T03_04_Tip_Znakovni_podaci_char");
+
+        Console.WriteLine('A' + 3);             // broj 68 (=65+3)
+        Console.WriteLine((char)'A' + 3);       // broj 68 (=65+3) 
+        Console.WriteLine((char)('A' + 3));     // slovo 'D'
+        Console.WriteLine((char)('4' + 3));     // slovo '7'
+
+
+        // char c = (char)Console.Read();
+        // char odgovor = (char)Console.Read();
+        char odgovor = 'A';
+        int redni_broj_odgovora = 1 + odgovor - 'A';
+
+        char char_odgovor = (char)('A' + redni_broj_odgovora - 1);
+        char_odgovor = char.ToUpper('b');
+
+        redni_broj_odgovora = 1 + char.ToUpper(char_odgovor) - 'A';
+        redni_broj_odgovora = 1 + char.ToLower(char_odgovor) - 'a';
+
+
+        Console.OutputEncoding = System.Text.Encoding.Unicode;
+        Console.WriteLine('Њ');
+    }
+    static void T03_05_Tip_Tekstulani_podaci()
+    {
+        // https://petlja.org/kurs/11171/8/
+        Console.WriteLine();
+        Console.WriteLine("T03_05_Tip_Tekstulani_podaci");
+
+        // string tekst = Console.ReadLine();
+        string tekst = "Kako se zoveš?";
+        Console.WriteLine(tekst);
+        string[] s = tekst.Split();
+        Console.WriteLine(s[0]);
+        Console.WriteLine(s[1]);
+        Console.WriteLine(s[2]);
+
+        // string sIzraz3 = Console.ReadLine();
+        string sIzraz3 = "2 + 13 + 6";
+        string[] s3 = sIzraz3.Split('+');
+        int a = int.Parse(s3[0]);
+        int b = int.Parse(s3[1]);
+        int c = int.Parse(s3[2]);
+        Console.WriteLine(a + b + c);
+
+        // Metodi IndexOf i Substring
+        // https://petlja.org/kurs/11171/8/#indexof-substring
+        Console.WriteLine();
+        Console.WriteLine("T03_05_Tip_Tekstulani_podaci(): Metodi IndexOf i Substring");
+
+        // string sIzraz4 = Console.ReadLine();
+        string sIzraz4 = "27 + 3+ 5 =";                 
+        int pozPrvogPlusa = sIzraz4.IndexOf('+');
+        int pozDrugogPlusa = sIzraz4.IndexOf('+', pozPrvogPlusa + 1);
+        int pozJednako = sIzraz4.IndexOf('=');
+        int duzinaPrvogBroja = pozPrvogPlusa;
+        int duzinaDrugogBroja = pozDrugogPlusa - pozPrvogPlusa - 1;
+        int duzinaTrecegBroja = pozJednako - pozDrugogPlusa - 1;
+        a = int.Parse(sIzraz4.Substring(0, duzinaPrvogBroja));
+        b = int.Parse(sIzraz4.Substring(pozPrvogPlusa + 1, duzinaDrugogBroja));
+        c = int.Parse(sIzraz4.Substring(pozDrugogPlusa + 1, duzinaTrecegBroja));
+        Console.WriteLine(a + b + c);
+
+        // Metodi ToLower i ToUpper
+        // https://petlja.org/kurs/11171/8/#tolower-toupper
+        Console.WriteLine();
+        Console.WriteLine("T03_05_Tip_Tekstulani_podaci(): Metodi ToLower i ToUpper");
+
+        // string recenica = Console.ReadLine();
+        string recenica = "Ovo je neka recenica.";      
+        int pozPrvogRazmaka = recenica.IndexOf(' ');
+        string prvaRec = recenica.Substring(0, pozPrvogRazmaka);
+        string ostatakRecenice = recenica.Substring(pozPrvogRazmaka + 1);
+        Console.WriteLine(prvaRec.ToUpper() + " " + ostatakRecenice);
+
+        // Svojstvo Length
+        // https://petlja.org/kurs/11171/8/1329#length
+        Console.WriteLine();
+        Console.WriteLine("T03_05_Tip_Tekstulani_podaci(): Svojstvo Length");
+
+        // string recenica = Console.ReadLine();
+        string sRec = "Здраво";
+        Console.WriteLine(sRec.Length);
+
+        // Broj simbola i duzina strniga
+        // https://petlja.org/kurs/11171/8/1329#id2
+        Console.WriteLine();
+        Console.WriteLine("T03_05_Tip_Tekstulani_podaci(): Broj simbola i duzina strniga");
+
+        string sSimbol = "🤩";
+        Console.WriteLine(sSimbol.Length);  // 2B
+        // char c = '🤩'; // Greska isto kao char c = 'AB'; // Error CS1012: Too many characters in character literal
+    }
+    static void T03_06_Tip_Logicki_podaci()
+    {
+        // https://petlja.org/kurs/11171/9/
+        Console.WriteLine();
+        Console.WriteLine("T03_06_Tip_Logicki_podaci");
+
+        // int a = int.Parse(Console.ReadLine());
+        // int b = int.Parse(Console.ReadLine());
+        int a = 56;
+        int b = 49;
+        Console.WriteLine(a < b);
+
+        //char ch1 = (char)Console.Read();
+        //char ch2 = (char)Console.Read();
+        char ch1 = 'a';
+        char ch2 = 'b';
+        Console.WriteLine(ch1 < ch2);
+    }
+
+    static void T03_06_Tip_Logicki_podaci_Poredjenje_tekstualnih_podataka()
+    {
+        // https://petlja.org/kurs/11171/9/
+        Console.WriteLine();
+        Console.WriteLine("T03_06_Tip_Logicki_podaci_Poredjenje_tekstualnih_podataka()");
+
+        // "sr-SP-Latn" за латиницу, "sr-SP-Cyrl" за ћирилицу
+        // CultureInfo.CurrentCulture = new CultureInfo("sr-SP-Cyrl", false);
+        System.Globalization.CultureInfo.CurrentCulture = new System.Globalization.CultureInfo("sr-SP-Cyrl", false);  // using System.Globalization;
+        Console.OutputEncoding = System.Text.Encoding.Unicode;
+        Console.InputEncoding = System.Text.Encoding.Unicode;
+
+        // string[] tekstovi = Console.ReadLine().Split();
+        // string tekstovi_ulaz = "Marijana Mira";
+        string tekstovi_ulaz = "ражањ Ражањ";
+        string[] tekstovi = tekstovi_ulaz.Split();
+        string tekst1 = tekstovi[0];
+        string tekst2 = tekstovi[1];
+
+        Console.WriteLine("{0} {1} {2}",
+            String.Compare(tekst1, tekst2, StringComparison.Ordinal),
+            String.Compare(tekst1, tekst2),
+            String.Compare(tekst1, tekst2, true));
+    }
+
+    static void T03_06_Tip_Logicki_podaci_Logicki_tip()
+    {
+        // https://petlja.org/kurs/11171/9/#id3
+        Console.WriteLine();
+        Console.WriteLine("T03_06_Tip_Logicki_podaci_Logicki_tip");
+
+        bool f = true, g;
+        // ...
+        f = false;
+        g = true;
+
+        //int a = int.Parse(Console.ReadLine());
+        //int b = int.Parse(Console.ReadLine());
+        int a = 19;
+        int b = 6;
+        bool manji = a < b;
+
+        //string s1 = Console.ReadLine();
+        //string s2 = Console.ReadLine();
+        string s1 = "Aleksandra";
+        string s2 = "Aleksandar";
+        bool kraci = s1.Length < s2.Length;
+
+        Console.WriteLine(a < b); // исписујемо вредност израза
+        Console.WriteLine(manji); // исписујемо вредност променљиве
+
+        //int n = int.parse(console.readline());
+        int n = 365;
+        Console.WriteLine(0 <= n && n <= 100);
+
+        Console.WriteLine("Unesite visinu i sirinu papira: ");
+        //int visinaPapira = int.Parse(Console.ReadLine());
+        //int sirinaPapira = int.Parse(Console.ReadLine());
+        int visinaPapira = 290;
+        int sirinaPapira = 210;
+
+        Console.WriteLine("Unesite visinu i sirinu koverte: ");
+        //int visinaKoverte = int.Parse(Console.ReadLine());
+        //int sirinaKoverte = int.Parse(Console.ReadLine());
+        int visinaKoverte = 230;
+        int sirinaKoverte = 300;
+
+        bool mozeUzduz = visinaPapira < visinaKoverte && sirinaPapira < sirinaKoverte;
+        bool mozePopreko = visinaPapira < sirinaKoverte && sirinaPapira < visinaKoverte;
+        bool moze = mozeUzduz || mozePopreko;
+        Console.WriteLine(moze);
+    }
+
+    static void Main()
+    {
+        T03_01_Tip_Broj_Realan();
+        T03_02_Tip_Broj_Ceo();
+        T03_02_Tip_Broj_Ceo_int_prekoracenje();
+        T03_03_Tip_Konverzije_i_zaokruzivanje_Konverzije();
+        T03_03_Tip_Konverzije_i_zaokruzivanje_Zaokruzivanje();
+        T03_03_Tip_Konverzije_i_zaokruzivanje_o_gubitku_tacnosti();
+        T03_04_Tip_Znakovni_podaci_char();
+        T03_05_Tip_Tekstulani_podaci();
+        T03_06_Tip_Logicki_podaci();
+        T03_06_Tip_Logicki_podaci_Poredjenje_tekstualnih_podataka();
+        T03_06_Tip_Logicki_podaci_Logicki_tip();
+    }
+}
